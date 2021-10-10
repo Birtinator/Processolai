@@ -27,13 +27,30 @@ public class View extends PApplet {
     public void draw() {
         background(0);
         for(Boid boid : this.flock.boids){
+
+            /*
+             * https://processing.org/tutorials/transform2d
+             * rotate() and translate() move the coordinate system, not the object!
+             * Correctly rotating by:
+             * 1. Translate the coordinate system's origin to where the Boid should be
+             * 2. Rotating the whole coordinate system
+             * 3. Drawing the Boid at the origin
+             */
+
+            float theta = boid.getVelocity().heading();
             fill(244);
-            ellipse(boid.getPosition().x, boid.getPosition().y, 21, 10);
-            rotate((float)Math.atan2(boid.getDirection().x, boid.getDirection().y)); //teufelszeug
-            
+            pushMatrix();
+            translate(boid.getPosition().x, boid.getPosition().y);
+            rotate(theta);
+            ellipse(0, 0, 21, 10);
+            popMatrix();
+
+
         }
         flock.updateFlock();
-      //  System.out.println(flock.boids[0]);
+
+
+        //  System.out.println(flock.boids[0]);
 
     }
 

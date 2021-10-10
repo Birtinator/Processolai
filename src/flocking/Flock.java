@@ -4,7 +4,7 @@ import processing.core.PVector;
 
 public class Flock {
 
-    public static final int BOID_NUMBER = 300;
+    public static final int BOID_NUMBER = 600;
     Boid[] boids = new Boid[BOID_NUMBER];
 
     public Flock(){

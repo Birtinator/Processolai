@@ -42,19 +42,20 @@ public class Boid {
                 alignment.add(neighbor.getVelocity());
                 cohesion.add(neighbor.getPosition());
                 separation.add(this.getPosition().copy().sub(neighbor.getPosition()).div(distance));
+
             }
         }
 
         if(neighborcount > 0){
-            this.acceleration.add(separation.div(neighborcount).normalize().mult(1));
-            this.acceleration.add(alignment.div(neighborcount).normalize().mult(5));
-            this.acceleration.add(cohesion.div(neighborcount).sub(this.position).normalize().mult(5));
+            this.acceleration.add(separation.div(neighborcount).normalize().mult(0.13f));
+            this.acceleration.add(alignment.div(neighborcount).normalize().mult(0.01f));
+            this.acceleration.add(cohesion.div(neighborcount).sub(this.position).normalize().mult(0.16f));
         }
 
         accelerate();
         move();
 
-
+        this.acceleration.mult(0);
 
     }
 
